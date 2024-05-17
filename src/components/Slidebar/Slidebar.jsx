@@ -19,7 +19,7 @@ const Slidebar = () => {
     { icon: <CreatePostLogo />, text: "Create" },
     {
       icon: <Avatar size={"sm"} name="Trana 2003" src="/profilepic.png" />,
-      text: "Home",
+      text: "Profile",
       link: "/asaprogrammer",
     },
   ];

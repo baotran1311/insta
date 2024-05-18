@@ -23,7 +23,7 @@ const SuggestedUsers = () => {
       <SuggestedUser
         name="Dan Abrahmov"
         followers={1392}
-        avatar="https:/bit.ly/dan-abramov"
+        avatar="https:/bit.ly/-abramov"
       />
       <SuggestedUser
         name="Ryan Florence"

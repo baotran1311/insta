@@ -15,7 +15,7 @@ const useLogout = () => {
       showToast("Error", error.message, "error");
     }
   };
-  return { handleLogout, loading, error };
+  return { handleLogout, isLoggingOut, error };
 };
 
 export default useLogout;

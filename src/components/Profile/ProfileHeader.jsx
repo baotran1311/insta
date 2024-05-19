@@ -46,28 +46,28 @@ const ProfileHeader = () => {
               Edit Profile
             </Button>
           </Flex>
+        </Flex>
 
-          <Flex alignItems={"center"} gap={{ base: 2, sm: 4 }}>
-            <Text>
-              <Text as="span" fontWeight={"bold"} mr={1}>
-                4
-              </Text>
-              Posts
+        <Flex alignItems={"center"} gap={{ base: 2, sm: 4 }}>
+          <Text>
+            <Text as="span" fontWeight={"bold"} mr={1}>
+              4
             </Text>
+            Posts
+          </Text>
 
-            <Text>
-              <Text as="span" fontWeight={"bold"} mr={1}>
-                149
-              </Text>
-              Followers
+          <Text>
+            <Text as="span" fontWeight={"bold"} mr={1}>
+              149
             </Text>
-            <Text>
-              <Text as="span" fontWeight={"bold"} mr={1}>
-                175
-              </Text>
-              Following
+            Followers
+          </Text>
+          <Text>
+            <Text as="span" fontWeight={"bold"} mr={1}>
+              175
             </Text>
-          </Flex>
+            Following
+          </Text>
         </Flex>
         <Flex alignItems={"center"} gap={4}>
           <Text fontSize={"sm"} fontWeight={"bold"}>

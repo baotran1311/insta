@@ -1,7 +1,7 @@
 import { SlGameController } from "react-icons/sl";
 import { auth, firestore } from "../firebase/firebase";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
 import useShowToast from "./useShowToast";
 import useAuthStore from "../store/authStore";
 const useSignupWithEmailAndPassword = () => {
@@ -22,6 +22,15 @@ const useSignupWithEmailAndPassword = () => {
       console.log("Please fill all the fields");
       return;
     }
+
+    const usersRef = collection(firestore, "users");
+    const q = query(usersRef, where("username", "==", inputs.username));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      showToast("Error", "Username aldready exists", "error");
+    }
+
     try {
       const newUser = await createUserWithEmailAndPassword(
         inputs.email,

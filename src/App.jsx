@@ -8,7 +8,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./firebase/firebase";
 
 function App() {
-  const [authUser, loading] = useAuthState(auth);
+  const [authUser] = useAuthState(auth);
 
   return (
     <PayLayout>

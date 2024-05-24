@@ -10,10 +10,16 @@ import {
 import useUserProfileStore from "../../store/userProfileStore";
 import useAuthStore from "../../store/authStore";
 import EditProfile from "./EditProfile";
+import useFollowUser from "../../hooks/useFollowUser";
 
 const ProfileHeader = () => {
   const { userProfile } = useUserProfileStore();
   const authUser = useAuthStore((state) => state.user);
+
+  const { isFollowing, isUpdating, handleFollowUser } = useFollowUser(
+    userProfile?.uid
+  );
+
   const visitingOwnProfileAuth =
     authUser && authUser.username === userProfile.username;
 
@@ -73,8 +79,10 @@ const ProfileHeader = () => {
                 color={"white"}
                 _hover={{ bg: "whiteAlpha.800" }}
                 size={{ base: "xs", md: "sm" }}
+                onClick={handleFollowUser}
+                isLoading={isUpdating}
               >
-                Follow
+                {isFollowing ? "UnFollow" : "Follow"}
               </Button>
             </Flex>
           )}
@@ -110,7 +118,6 @@ const ProfileHeader = () => {
       </VStack>
       {isOpen && <EditProfile isOpen={isOpen} onClose={onClose} />}
     </Flex>
-    
   );
 };
 

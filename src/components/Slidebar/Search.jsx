@@ -19,16 +19,17 @@ import {
 import { SearchLogo } from "../../assets/contants";
 import useSearchUser from "../../hooks/useSearchUser";
 import { useRef } from "react";
+import SuggestedUser from "../SuggestedUsers/SuggestedUser";
 
 const Search = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { user, isLoading, getUserProfile } = useSearchUser();
+  const { user, isLoading, getUserProfile, setUser } = useSearchUser();
   const searchRef = useRef(null);
   const handleSearchUser = (e) => {
     e.preventDefault();
     getUserProfile(searchRef.current.value);
   };
-  console.log(user);
+  
   return (
     <>
       <Tooltip
@@ -78,6 +79,7 @@ const Search = () => {
                 </Button>
               </Flex>
             </form>
+            {user && <SuggestedUser user={user} setUser={setUser}/>}
           </ModalBody>
         </ModalContent>
       </Modal>

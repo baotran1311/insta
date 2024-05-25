@@ -12,17 +12,11 @@ import ProfilePost from "./ProfilePost";
 import useGetUserPost from "../../hooks/useGetUserPost";
 
 const ProfilePosts = () => {
-  // const [isLoading, setIsLoading] = useState(true);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 2000);
-  // }, []);
-
   const { isLoading, posts } = useGetUserPost();
   const noPostsFound = !isLoading && posts.length === 0;
+  console.log(posts[0]);
   if (noPostsFound) return <NoPostsFound />;
+
   return (
     <Grid
       templateColumns={{ sm: "repeat(1, 1fr)", md: "repeat(3,1fr)" }}

@@ -28,6 +28,7 @@ import { firestore, storage } from "../../firebase/firebase";
 import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import usePostStore from "../../store/postStore";
+import Caption from "../Comment/Caption";
 
 const ProfilePost = ({ post }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -36,10 +37,8 @@ const ProfilePost = ({ post }) => {
   const showToast = useShowToast();
   const [isDeleting, setIsDeleting] = useState(false);
   const deletePost = usePostStore((state) => state.deletePost);
-  const deletePostFromProfile = useUserProfileStore(
-    (state) => state.deletePost
-  );
-
+  const decrementPostsCount = useUserProfileStore((state) => state.deletePost);
+  console.log(post);
   const handleDeletePost = async () => {
     if (!window.confirm("Are you sure you want to delete this post?")) return;
     if (isDeleting) return;
@@ -53,7 +52,7 @@ const ProfilePost = ({ post }) => {
       });
 
       deletePost(post.id);
-      deletePostFromProfile(post.id)
+      decrementPostsCount(post.id);
       showToast("Success", "Post deleted successfully", "success");
     } catch (error) {
       showToast("Error", error.message, "error");
@@ -170,26 +169,20 @@ const ProfilePost = ({ post }) => {
                 </Flex>
                 <Divider my={4} bg={"gray.500"} />
                 <VStack
-                  w={"full"}
+                  w="full"
                   alignItems={"start"}
                   maxH={"350px"}
                   overflowY={"auto"}
                 >
-                  <Comment
-                    createdAt="1d ago"
-                    username="tranaprogrammer_"
-                    profilepic="/profilepic.png"
-                    text="Dummy images from unsplash"
-                  />
-                  <Comment
-                    createdAt="12h ago"
-                    username="abramov"
-                    profilepic="https:/bit.ly/-abramov"
-                    text="Nice pic"
-                  />
+                  {/* CAPTION */}
+                  {post?.caption && <Caption post={post} />}
+                  {/* COMMENT */}
+                  {post?.comment?.map((comment) => (
+                    <Comment key={comment.id} comment={comment} />
+                  ))}
                 </VStack>
                 <Divider my={4} bg={"gray.500"} />
-                <PostFooter isProfilePage={true} />
+                <PostFooter isProfilePage={true} post={post} />
               </Flex>
             </Flex>
           </ModalBody>

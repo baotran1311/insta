@@ -7,15 +7,6 @@ const SuggestedUser = ({ user, setUser }) => {
   const { isFollowing, isUpdating, handleFollowUser } = useFollowUser(user.uid);
   const authUser = useAuthStore((state) => state.user);
 
-  // const onFollowUser = async () => {
-  //   await handleFollowUser();
-  //   setUser({
-  //     ...user,
-  //     followers: isFollowing
-  //       ? user.followers.filter((follower) => follower.uid != authUser.uid)
-  //       : [...user.followers, authUser],
-  //   });
-  // };
   const onFollowUser = async () => {
     await handleFollowUser();
     setUser({
@@ -32,9 +23,12 @@ const SuggestedUser = ({ user, setUser }) => {
           <Avatar src={user.profilePicURL} size={"md"} />
         </Link>
         <VStack spacing={2} alignItems={"flex-start"}>
-          <Box fontSize={12} fontWeight={"bold"}>
-            {user.fullname}
-          </Box>
+          <Link to={`/${user.username}`}>
+            <Box fontSize={12} fontWeight={"bold"}>
+              {user.fullname}
+            </Box>
+          </Link>
+
           <Box fontSize={11} color={"gray.500"}>
             {user.followers.length} followers
           </Box>

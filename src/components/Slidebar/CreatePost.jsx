@@ -37,7 +37,7 @@ import useUserProfileStore from "../../store/userProfileStore";
 
 const CreatePost = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [ caption, setCaption] = useState("");
+  const [caption, setCaption] = useState("");
   const imageRef = useRef(null);
   const { handleImageChange, selectedFile, setSelectedFile } = usePreviewImg();
   const { isLoading, handleCreatePost } = useCreatePost();
@@ -174,8 +174,13 @@ function useCreatePost() {
       await updateDoc(postDocRef, { imageURL: dowloadURL });
 
       newPost.imageURL = dowloadURL;
-      createPost({ ...newPost, id: postDocRef.id });
-      addPost({ ...newPost, id: postDocRef.id });
+
+      if (userProfile.uid === authUser.uid) {
+      
+      }
+
+      if (pathname !== "/" && userProfile.uid === authUser.uid)
+        addPost({ ...newPost, id: postDocRef.id });
       showToast("Succes", "Post created successfully", "success");
     } catch (error) {
       showToast("Error", error.message, "error");
